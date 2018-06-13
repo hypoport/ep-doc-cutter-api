@@ -1,0 +1,65 @@
+swagger: '2.0'
+info:
+  title: Cutter API
+  description: Dokument-Schnitt-Service
+  version: "1.0.0"
+# the domain of the service
+host: api.uber.com
+# array of all schemes that your API supports
+schemes:
+  - https
+# will be prefixed to all paths
+basePath: /v1
+produces:
+  - application/pdf
+paths:
+  /composedPdf:
+    post:
+      summary: Zusammenschnitt von Eingangsdokumenten
+      description: |
+        TODO.
+      parameters:
+        - name: dokumentInput
+          in: body
+          description: Latitude component of location.
+          required: true
+          schema:
+            $ref: '#/definitions/DokumentInput'
+      tags:
+        - Dokument
+      responses:
+        200:
+          description: Ein zusammengefügtes Dokument
+          schema:
+            type: file
+definitions:
+  Error:
+    type: object
+    properties:
+      code:
+        type: integer
+        format: int32
+      message:
+        type: string
+      fields:
+        type: string
+  DokumentInput:
+    type: object
+    properties:
+      filename:
+        type: string
+      kapitel:
+        type: array
+        items:
+          $ref: '#/definitions/Dokument'
+  Dokument:
+    type: object
+    properties:
+      uri:
+        type: string
+        format: uri
+      seitenzahlen:
+        type: array
+        items:
+          type: integer
+          format: int32
