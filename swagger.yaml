@@ -3,12 +3,8 @@ info:
   title: Cutter API
   description: Dokument-Schnitt-Service
   version: "1.0.0"
-# the domain of the service
-host: api.uber.com
-# array of all schemes that your API supports
 schemes:
   - https
-# will be prefixed to all paths
 basePath: /v1
 produces:
   - application/pdf
@@ -16,12 +12,12 @@ paths:
   /composedPdf:
     post:
       summary: Zusammenschnitt von Eingangsdokumenten
-      description: |
-        TODO.
+      description: Generiert aus mehreren Eingangs-Dokumenten ein Zieldokument.
+      operationId: generateComposedPdf
       parameters:
         - name: dokumentInput
           in: body
-          description: Latitude component of location.
+          description: Input für ein einzelnes zu erzeugendes Dokument.
           required: true
           schema:
             $ref: '#/definitions/DokumentInput'
@@ -32,17 +28,11 @@ paths:
           description: Ein zusammengefügtes Dokument
           schema:
             type: file
+        default:
+          description: Unerwarteter Fehler
+          schema:
+            $ref: '#/definitions/Error'
 definitions:
-  Error:
-    type: object
-    properties:
-      code:
-        type: integer
-        format: int32
-      message:
-        type: string
-      fields:
-        type: string
   DokumentInput:
     type: object
     properties:
@@ -63,3 +53,19 @@ definitions:
         items:
           type: integer
           format: int32
+  Error:
+      type: object
+      properties:
+        message:
+          type: string
+        statusCode:
+          type: integer
+          format: int32
+        statusMessage:
+          type: string
+        timestamp:
+          type: string
+          format: date-time
+        traceId:
+          type: string
+      title: Error
