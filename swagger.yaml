@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Cutter API
   description: Dokument-Schnitt-Service
-  version: "1.0.0"
+  version: "1.1.0"
 schemes:
   - https
 basePath: /v1
@@ -36,20 +36,28 @@ definitions:
   DokumentInput:
     type: object
     properties:
-      filename:
+      zielDateiName:
         type: string
-      kapitel:
+        description: |
+          Empfohlener Datei-Name.
+      dokumentenTeile:
         type: array
+        description: |
+          Sortierte Verweise auf Original-Dokumente, die zu einem Ziel-Dokument zusammenzufassen sind.
         items:
-          $ref: '#/definitions/Dokument'
-  Dokument:
+          $ref: '#/definitions/DokumentenTeil'
+  DokumentenTeil:
     type: object
     properties:
       uri:
         type: string
         format: uri
-      seitenzahlen:
+        description: |
+          Download-URI für das Original-Dokument.
+      seitenNummern:
         type: array
+        description: |
+          Sortierte Seiten im Original-Dokument, die zu verwenden sind, 1-basiert.
         items:
           type: integer
           format: int32
