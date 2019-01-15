@@ -61,6 +61,26 @@ definitions:
         items:
           type: integer
           format: int32
+      seiten:
+        type: array
+        description: |
+          Sortierte Seiten im Original-Dokument, die zu verwenden sind.
+        items:
+          $ref: '#/definitions/DokumentenSeite'
+  DokumentenSeite:
+    type: object
+    properties:
+      seitenNummer:
+        type: integer
+        format: int32
+        description: |
+          Seitennummer im Dokument, 1-basiert.
+      orientierung:
+        type: integer
+        format: int32
+        description: |
+          Gewünschte Orientierung der Seite in Grad, bezogen auf das bestehende Dokument. Um diesen Wert wird die Seite für das neue Dokument gedreht. |
+          Sinnvolle Werte sind eigentlich nur 0, 90, 180, 270.
   Error:
       type: object
       properties:
