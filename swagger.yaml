@@ -54,13 +54,6 @@ definitions:
         format: uri
         description: |
           Download-URI für das Original-Dokument.
-      seitenNummern:
-        type: array
-        description: |
-          Sortierte Seiten im Original-Dokument, die zu verwenden sind, 1-basiert.
-        items:
-          type: integer
-          format: int32
       seiten:
         type: array
         description: |
