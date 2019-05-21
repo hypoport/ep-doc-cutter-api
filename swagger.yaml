@@ -2,18 +2,20 @@ swagger: '2.0'
 info:
   title: Cutter API
   description: Dokument-Schnitt-Service
-  version: "1.1.0"
+  version: "1.2.0"
 schemes:
   - https
 basePath: /v1
 produces:
-  - application/pdf
+  - application/json
 paths:
   /composedPdf:
     post:
       summary: Zusammenschnitt von Eingangsdokumenten
       description: Generiert aus mehreren Eingangs-Dokumenten ein Zieldokument.
       operationId: generateComposedPdf
+      produces:
+        - application/pdf
       parameters:
         - name: dokumentInput
           in: body
@@ -32,7 +34,42 @@ paths:
           description: Unerwarteter Fehler
           schema:
             $ref: '#/definitions/Error'
+
+  /composeMultiplePdfs:
+    post:
+      summary: Zusammenschnitt von Eingangsdokumenten
+      description: Generiert aus den angegebenen Teilen der Eingangsdokumente mehrere Zieldokumente und lädt diese in die Dokumentenverwaltung hoch.
+      operationId: generateAndUploadMultiplePdfs
+      parameters:
+        - name: dokumenteRequestInput
+          in: body
+          description: Daten für die zu erzeugenden Dokumente
+          required: true
+          schema:
+            $ref: '#/definitions/MehrereDokumenteInput'
+      tags:
+        - Dokument
+      responses:
+        200:
+          description: die Daten der erzeugten Dokumente in der Reihenfolge der Dokumentdefinitionen im Request
+          schema:
+            $ref: '#/definitions/ErzeugteDokumente'
+        default:
+          description: Unerwarteter Fehler
+          schema:
+            $ref: '#/definitions/Error'
 definitions:
+  MehrereDokumenteInput:
+    type: object
+    properties:
+      vorgangsNummer:
+        type: string
+        description: |
+          Vorgangsnummer, unter der die Zieldateien in der Dokumenteverwaltung angelegt werden sollen
+      dokumente:
+        type: array
+        items:
+          $ref: '#/definitions/DokumentInput'
   DokumentInput:
     type: object
     properties:
@@ -40,6 +77,10 @@ definitions:
         type: string
         description: |
           Empfohlener Datei-Name.
+      zielAnzeigeName:
+        type: string
+        description: |
+          Empfohlener Anzeige-Name.
       dokumentenTeile:
         type: array
         description: |
@@ -74,6 +115,27 @@ definitions:
         description: |
           Gewünschte Orientierung der Seite in Grad, bezogen auf das bestehende Dokument. Um diesen Wert wird die Seite für das neue Dokument gedreht. |
           Sinnvolle Werte sind eigentlich nur 0, 90, 180, 270.
+  ErzeugtesDokument:
+    type: object
+    properties:
+      id:
+        type: string
+        description: |
+          id des erzeugten Dokuments in der Dokumenteverwaltung
+      oeffentlicherSchluessel:
+        type: string
+        description: |
+          öffentlicher Schlüssel des erzeugten Dokuments in der Dokumenteverwaltung
+      type:
+        type: string
+        description: |
+          MIME-Typ des erzeugten Dokuments
+  ErzeugteDokumente:
+    type: array
+    description: |
+      die Daten der erzeugten Dokumente
+    items:
+      $ref: '#/definitions/ErzeugtesDokument'
   Error:
       type: object
       properties:
