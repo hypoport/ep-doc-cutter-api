@@ -2,7 +2,7 @@ swagger: '2.0'
 info:
   title: Cutter API
   description: Dokument-Schnitt-Service
-  version: "1.2.0"
+  version: "1.2.1"
 schemes:
   - https
 basePath: /v1
@@ -53,7 +53,9 @@ paths:
         200:
           description: die Daten der erzeugten Dokumente in der Reihenfolge der Dokumentdefinitionen im Request
           schema:
-            $ref: '#/definitions/ErzeugteDokumente'
+            type: array
+            items:
+              $ref: '#/definitions/ErzeugtesDokument'
         default:
           description: Unerwarteter Fehler
           schema:
@@ -130,12 +132,6 @@ definitions:
         type: string
         description: |
           MIME-Typ des erzeugten Dokuments
-  ErzeugteDokumente:
-    type: array
-    description: |
-      die Daten der erzeugten Dokumente
-    items:
-      $ref: '#/definitions/ErzeugtesDokument'
   Error:
       type: object
       properties:
