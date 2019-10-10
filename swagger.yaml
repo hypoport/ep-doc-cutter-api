@@ -123,15 +123,18 @@ definitions:
       id:
         type: string
         description: |
-          id des erzeugten Dokuments in der Dokumenteverwaltung
+          id des erzeugten Dokuments in der Dokumenteverwaltung. null, wenn das Dokument nicht erzeugt werden konnte.
       oeffentlicherSchluessel:
         type: string
         description: |
-          öffentlicher Schlüssel des erzeugten Dokuments in der Dokumenteverwaltung
+          öffentlicher Schlüssel des erzeugten Dokuments in der Dokumenteverwaltung. null, wenn das Dokument nicht erzeugt werden konnte.
       type:
         type: string
         description: |
           MIME-Typ des erzeugten Dokuments
+      fehlermeldung:
+        type: string
+        description: Fehlermeldung, falls das Dokument nicht erzeugt werden konnte.
   Error:
       type: object
       properties:
