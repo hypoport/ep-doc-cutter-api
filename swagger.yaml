@@ -83,6 +83,14 @@ definitions:
         type: string
         description: |
           Empfohlener Anzeige-Name.
+      zielPfadNetappS3:
+        type: string
+        description: |
+          wo das Dokument angespeichert werden soll Beispiel "antragsNummer/dokumentId" "AB1234/1/1/3jhjh6g34j6hguh6g23iuh6g23ug"
+      zielBucketNetappS3:
+        type: string
+        description: |
+          in welchem s3 bucket das Dokument gespoeichert wird.
       dokumentenTeile:
         type: array
         description: |
