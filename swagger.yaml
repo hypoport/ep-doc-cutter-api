@@ -140,6 +140,10 @@ definitions:
         type: string
         description: |
           MIME-Typ des erzeugten Dokuments
+      size:
+        type: integer
+        description: Dateigroesse in bytes.
+        format: int64
       fehlermeldung:
         type: string
         description: Fehlermeldung, falls das Dokument nicht erzeugt werden konnte.
