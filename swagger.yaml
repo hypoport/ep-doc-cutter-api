@@ -86,11 +86,19 @@ definitions:
       zielPfadNetappS3:
         type: string
         description: |
-          wo das Dokument angespeichert werden soll Beispiel "antragsNummer/dokumentId" "AB1234/1/1/3jhjh6g34j6hguh6g23iuh6g23ug"
+          unter welchem Pfad das Dokument im Netapp S3 gespeichert werden soll Beispiel "antragsNummer/dokumentId" "AB1234/1/1/3jhjh6g34j6hguh6g23iuh6g23ug"
       zielBucketNetappS3:
         type: string
         description: |
-          in welchem s3 bucket das Dokument gespoeichert wird.
+          in welchem Netapp S3 bucket das Dokument gespeichert wird.
+      zielPfadAmazonS3:
+        type: string
+        description: |
+          unter welchem Pfad das Dokument im Amazon S3 gespeichert werden soll Beispiel "antragsNummer/dokumentId" "AB1234/1/1/3jhjh6g34j6hguh6g23iuh6g23ug"
+      zielBucketAmazonS3:
+        type: string
+        description: |
+          in welchem Amazon S3 bucket das Dokument gespeichert wird.
       dokumentenTeile:
         type: array
         description: |
