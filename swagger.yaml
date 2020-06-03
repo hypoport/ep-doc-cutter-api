@@ -9,32 +9,6 @@ basePath: /v1
 produces:
   - application/json
 paths:
-  /composedPdf:
-    post:
-      summary: Zusammenschnitt von Eingangsdokumenten
-      description: Generiert aus mehreren Eingangs-Dokumenten ein Zieldokument.
-      operationId: generateComposedPdf
-      produces:
-        - application/pdf
-      parameters:
-        - name: dokumentInput
-          in: body
-          description: Input für ein einzelnes zu erzeugendes Dokument.
-          required: true
-          schema:
-            $ref: '#/definitions/DokumentInput'
-      tags:
-        - Dokument
-      responses:
-        200:
-          description: Ein zusammengefügtes Dokument
-          schema:
-            type: file
-        default:
-          description: Unerwarteter Fehler
-          schema:
-            $ref: '#/definitions/Error'
-
   /composeMultiplePdfs:
     post:
       summary: Zusammenschnitt von Eingangsdokumenten
