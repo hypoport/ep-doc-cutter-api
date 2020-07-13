@@ -71,6 +71,14 @@ definitions:
         format: uri
         description: |
           Download-URI für das Original-Dokument.
+      s3SourcePath:
+        type: string
+        description: |
+          s3 Bucket Pfad der Queldatei, z.b. AB12345/464654et64e9g4wfw4
+      s3SourceBucket:
+        type: string
+        description: |
+          s3 Bucket name der Quelldatei
       seiten:
         type: array
         description: |
